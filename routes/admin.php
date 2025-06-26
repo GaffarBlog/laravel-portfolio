@@ -16,6 +16,6 @@ Route::middleware(['auth', 'verified'])->prefix("admin-ag")->group(function () {
     // dashboard
     Route::controller(HeroContent::class)->group(function () {
         Route::get('/home-contents/hero', "index");
-        Route::patch('/home-contents/update', "update");
+        Route::post('/home-contents/update', "update");
     });
 });

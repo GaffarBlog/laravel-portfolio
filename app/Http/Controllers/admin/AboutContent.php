@@ -25,14 +25,11 @@ class AboutContent extends Controller
             'title' => 'required|string|max:255',
             'subtitle' => 'required|string|max:255',
             'description' => 'required|string|max:1000',
-            // 'about_image' => 'nullable|file|mimes:svg,png,jpg,jpeg|max:2048',
+            'about_image' => 'nullable|file|mimes:svg,png,jpg,jpeg|max:2048',
         ], [
             'title.required' => 'Please fill the title.',
             'subtitle.required' => 'Please fill the subtitle.',
             'description.required' => 'Please fill the description.',
-            // 'image.image' => 'The image must be an image file.',
-            // 'image.mimes' => 'The image must be a file of type: svg,png,jpg,jpeg.',
-            // 'image.max' => 'The image must not be greater than 2MB.',
         ]);
         $content =  HomeContent::where('section', 'about')->first();
 

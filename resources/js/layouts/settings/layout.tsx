@@ -31,6 +31,18 @@ export default function SettingsLayout({ children, type = 'profile' }: PropsWith
                 title: 'Summary',
                 href: '/admin-ag/home-contents/summary',
             },
+            {
+                title: 'About',
+                href: '/admin-ag/home-contents/about',
+            },
+            {
+                title: 'Skills',
+                href: '/admin-ag/home-contents/skills',
+            },
+            {
+                title: 'Projects',
+                href: '/admin-ag/home-contents/projects',
+            },
         ];
     }
     // When server-side rendering, we only render the layout on the client...

@@ -74,7 +74,7 @@ class HeroContent extends Controller
         foreach (['image_1' => "image_1_text", 'image_2' => "image_2_text", 'image_3' => "image_3_text", 'image_4' => "image_4_text"] as $file_key => $text_key) {
             if ($request->hasFile($file_key)) {
                 $image = $request->file($file_key);
-                $imageName = Str::slug($request[$text_key]) . '.' . $image->getClientOriginalExtension();
+                $imageName = Str::slug($request[$text_key]) . time() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('storage/uploads/home'), $imageName);
                 $contents[$file_key] = $imageName;
             }

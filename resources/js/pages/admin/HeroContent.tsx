@@ -84,7 +84,7 @@ const HeroContent = ({ contents }: { contents: ProfileForm | null }) => {
             }
         });
 
-        router.post('/admin-ag/home-contents/update', formData, {
+        router.post('/admin-ag/home-contents/hero', formData, {
             preserveScroll: true,
             forceFormData: true,
             onError: (errors) => {

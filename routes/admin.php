@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\HeroContent;
 use App\Http\Controllers\admin\AboutContent;
 use App\Http\Controllers\admin\SkillsContent;
 use App\Http\Controllers\admin\SummaryContent;
+use App\Http\Controllers\admin\SkillsController;
 
 
 
@@ -15,7 +16,13 @@ Route::middleware(['auth', 'verified'])->prefix("admin-ag")->group(function () {
     Route::controller(Dashboard::class)->group(function () {
         Route::get('/', "index")->name('dashboard');
     });
-
+    // Categories
+    Route::controller(SkillsController::class)->group(function () {
+        Route::get('/skills/{id?}', "index");
+        Route::post('/skills-add', "store");
+        Route::post('/skills-update', "update");
+        Route::delete('/skills/{category}', "destroy");
+    });
     // Hero contents
     Route::controller(HeroContent::class)->group(function () {
         Route::get('/home-contents/hero', "index");

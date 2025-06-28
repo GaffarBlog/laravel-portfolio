@@ -41,3 +41,11 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export interface SkillFormData {
+    name: string;
+    icon: File | null;
+    description?: string;
+    parent_id?: number;
+    type?: 'featured' | 'tab' | 'skill';
+}

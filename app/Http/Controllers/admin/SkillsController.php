@@ -54,14 +54,17 @@ class SkillsController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|unique:skills,name|max:255',
+            'id' => 'required|integer|exists:skills,id',
+            'name' => 'required|string|unique:skills,name,' . $request->id . '|max:255',
             'description' => 'nullable|string',
             'type' => 'required|string|in:skill,featured,tab',
             'icon' => 'nullable|file|max:2048',
             'parent_id' => 'nullable|integer|exists:home_contents,id'
         ]);
+
         // return $request->parent_id;
-        $file_name = null;
+        $skill = Skill::find($request->id);
+        $file_name = $skill->icon; // Keep the existing icon if not updated
         if ($request->hasFile("icon")) {
             $file = $request->file("icon");
             $file_name = Str::slug($request->name) . '.' . $file->getClientOriginalExtension();
@@ -71,14 +74,12 @@ class SkillsController extends Controller
             'description' => $request->description,
             'type' => $request->type,
             'icon' => $file_name,
+            'name' => $request->name,
         ];
         if ($request->parent_id) {
             $data['parent_id'] = $request->parent_id;
         }
-        Skill::updateOrCreate(
-            ['name' => $request->name],
-            $data
-        );
+        $skill->update($data);
 
         return redirect()->back()->with('success', 'Skills updated successfully.');
     }

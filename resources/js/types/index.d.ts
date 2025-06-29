@@ -48,4 +48,5 @@ export interface SkillFormData {
     description?: string;
     parent_id?: number;
     type?: 'featured' | 'tab' | 'skill';
+    editId?: number | null; // For editing existing skills
 }

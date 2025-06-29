@@ -83,6 +83,7 @@ const Skills = ({ skills, parent_id }: any) => {
             description: skill.description,
             parent_id: skill.parent_id,
             type: skill.type,
+            editId: skill.id,
         });
         setOpenEditDialog(true);
     };

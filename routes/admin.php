@@ -14,7 +14,7 @@ Route::middleware(['auth', 'verified'])->prefix("admin-ag")->group(function () {
 
     // dashboard
     Route::controller(Dashboard::class)->group(function () {
-        Route::get('/', "index")->name('dashboard');
+        Route::get('/dashboard', "index")->name('dashboard');
     });
     // Categories
     Route::controller(SkillsController::class)->group(function () {

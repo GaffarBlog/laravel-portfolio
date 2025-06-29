@@ -7,6 +7,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
 import { router } from '@inertiajs/react';
 import { FormEventHandler, useState } from 'react';
+import { toast } from 'sonner';
 type EditSkillModalProps = {
     openEditDialog: boolean;
     setOpenEditDialog: (open: boolean) => void;
@@ -41,6 +42,7 @@ const EditSkillModal = ({ openEditDialog, setOpenEditDialog, editData, setEditDa
         formData.append('description', editData.description ?? '');
         formData.append('type', editData.type ?? 'skill');
         formData.append('parent_id', editData.parent_id?.toString() ?? '');
+        formData.append('id', editData.editId?.toString() ?? '');
 
         if (editData.icon) {
             formData.append('icon', editData.icon);
@@ -58,14 +60,20 @@ const EditSkillModal = ({ openEditDialog, setOpenEditDialog, editData, setEditDa
                 setRecentlySuccessful(true);
                 setTimeout(() => setRecentlySuccessful(false), 2000);
                 setOpenEditDialog(false);
+
+                toast.success('Skill updated successfully!', {
+                    style: {
+                        backgroundColor: '#f0fdf4',
+                    },
+                });
             },
         });
     };
     return (
         <>
             <Dialog open={openEditDialog} onOpenChange={setOpenEditDialog}>
-                <form>
-                    <DialogContent className="sm:max-w-[425px] md:max-w-[600px]">
+                <DialogContent className="sm:max-w-[425px] md:max-w-[600px]">
+                    <form onSubmit={submit} className="w-full space-y-4" encType="multipart/form-data">
                         <DialogHeader>
                             <DialogTitle>Edit Skill</DialogTitle>
                             <DialogDescription>Make changes to the skill here. </DialogDescription>
@@ -86,7 +94,7 @@ const EditSkillModal = ({ openEditDialog, setOpenEditDialog, editData, setEditDa
                             </div>
                             <div className="grid gap-2">
                                 <RadioGroup
-                                    defaultValue="skill"
+                                    defaultValue={editData.type}
                                     name="type"
                                     className="flex items-center space-x-2"
                                     onValueChange={(value) => setEditData((prev: any) => ({ ...prev, type: value as 'featured' | 'tab' | 'skill' }))}
@@ -115,7 +123,7 @@ const EditSkillModal = ({ openEditDialog, setOpenEditDialog, editData, setEditDa
                             </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="description">Description</Label>
-                                {/* <Input id="description" className="mt-1 block w-full" onChange={handleChange} type="text" name="description" /> */}
+
                                 <Textarea id="description" onChange={handleChange} name="description" />
                                 <InputError className="mt-2" message={errors.description} />
                             </div>
@@ -128,8 +136,8 @@ const EditSkillModal = ({ openEditDialog, setOpenEditDialog, editData, setEditDa
                                 Save changes
                             </Button>
                         </DialogFooter>
-                    </DialogContent>
-                </form>
+                    </form>
+                </DialogContent>
             </Dialog>
         </>
     );

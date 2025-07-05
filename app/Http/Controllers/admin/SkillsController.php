@@ -13,7 +13,7 @@ class SkillsController extends Controller
 {
     public function index($id = null)
     {
-        $skills = Skill::whereNull("parent_id")->get();
+        $skills = Skill::get();
         return Inertia::render('admin/Skills', [
             'skills' => $skills,
             'parent_id' => $id,

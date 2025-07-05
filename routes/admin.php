@@ -11,7 +11,9 @@ use App\Http\Controllers\admin\SkillsController;
 
 
 Route::middleware(['auth', 'verified'])->prefix("admin-ag")->group(function () {
-
+    Route::get("/", function () {
+        return redirect()->route('dashboard');
+    });
     // dashboard
     Route::controller(Dashboard::class)->group(function () {
         Route::get('/dashboard', "index")->name('dashboard');

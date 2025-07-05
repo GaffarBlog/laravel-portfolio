@@ -17,8 +17,6 @@ return new class extends Migration
             $table->string('icon')->nullable();
             $table->string('description')->nullable();
             $table->enum('type', ['featured', 'tab', 'skill'])->default('skill');
-            $table->unsignedBigInteger('parent_id')->nullable();
-            $table->foreign('parent_id')->references('id')->on('skills')->onDelete('cascade');
             $table->timestamps();
         });
     }

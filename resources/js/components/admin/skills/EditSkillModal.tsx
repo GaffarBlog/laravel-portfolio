@@ -124,7 +124,7 @@ const EditSkillModal = ({ openEditDialog, setOpenEditDialog, editData, setEditDa
                             <div className="grid gap-2">
                                 <Label htmlFor="description">Description</Label>
 
-                                <Textarea id="description" onChange={handleChange} name="description" />
+                                <Textarea id="description" onChange={handleChange} value={editData.description} name="description" />
                                 <InputError className="mt-2" message={errors.description} />
                             </div>
                         </div>

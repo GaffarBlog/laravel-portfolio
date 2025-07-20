@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\Dashboard;
 use App\Http\Controllers\admin\HeroContent;
 use App\Http\Controllers\admin\AboutContent;
+use App\Http\Controllers\admin\ProjectController;
 use App\Http\Controllers\admin\SkillsContent;
 use App\Http\Controllers\admin\SummaryContent;
 use App\Http\Controllers\admin\SkillsController;
@@ -24,6 +25,13 @@ Route::middleware(['auth', 'verified'])->prefix("admin-ag")->group(function () {
         Route::post('/skills-add', "store");
         Route::post('/skills-update', "update");
         Route::delete('/skills/{category}', "destroy");
+    });
+    // Categories
+    Route::controller(ProjectController::class)->group(function () {
+        Route::get('/projects/{id?}', "index");
+        Route::post('/projects-add', "store");
+        Route::post('/projects-update', "update");
+        Route::delete('/projects/{category}', "destroy");
     });
     // Hero contents
     Route::controller(HeroContent::class)->group(function () {

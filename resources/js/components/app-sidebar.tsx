@@ -18,6 +18,11 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
+        title: 'Projects',
+        href: '/admin-ag/projects',
+        icon: LayoutGrid,
+    },
+    {
         title: 'Contents',
         href: '/admin-ag/home-contents/hero',
         icon: LayoutGrid,
